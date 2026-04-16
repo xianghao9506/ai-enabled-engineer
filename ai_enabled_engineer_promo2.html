@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI-Enabled Engineer &mdash; Kevin Cai | Wiley &amp; IEEE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1a1a18;--ink-muted:#5a5a54;--ink-faint:#9a9a92;
+  --page:#faf9f6;--surface:#f2f0eb;--border:rgba(26,26,24,.12);--border-strong:rgba(26,26,24,.22);
+  --gold:#b08d57;--gold-light:#f0e8d8;
+  --blue-deep:#1a3557;--blue-mid:#2d5a9e;--blue-light:#e8eef6;
+  --serif:'Playfair Display',Georgia,serif;--sans:'Source Sans 3',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--page);color:var(--ink);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+nav{border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;background:var(--page);z-index:100}
+.nav-logo{font-family:var(--serif);font-size:15px;color:var(--ink);text-decoration:none}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:13px;color:var(--ink-muted);text-decoration:none;letter-spacing:.03em;transition:color .15s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{background:var(--ink);color:var(--page)!important;padding:6px 16px;border-radius:4px;font-size:13px!important}
+.container{max-width:760px;margin:0 auto;padding:0 1.5rem}
+.hero{padding:5rem 1.5rem 3.5rem;max-width:760px;margin:0 auto;border-bottom:1px solid var(--border)}
+.hero-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:1.5rem;flex-wrap:wrap}
+.pub-pill{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--gold);border:1px solid var(--gold);border-radius:3px;padding:3px 9px}
+.hero-meta{font-size:13px;color:var(--ink-faint);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hero-meta-dot{width:3px;height:3px;border-radius:50%;background:var(--ink-faint)}
+.hero h1{font-family:var(--serif);font-size:clamp(26px,5vw,42px);line-height:1.18;font-weight:500;margin-bottom:1.5rem;color:var(--ink);letter-spacing:-.01em}
+.hero h1 em{font-style:italic;color:var(--blue-deep)}
+.hero-lead{font-size:18px;line-height:1.75;color:var(--ink-muted);margin-bottom:1rem;font-weight:300}
+.hero-lead strong{color:var(--ink);font-weight:400}
+section{padding:3.5rem 0;border-bottom:1px solid var(--border)}
+.section-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--ink-faint);margin-bottom:1.75rem}
+.insight-list{border-top:1px solid var(--border)}
+.insight-item{border-bottom:1px solid var(--border)}
+.insight-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:1.25rem 0;cursor:pointer;user-select:none}
+.insight-header:hover .insight-title{color:var(--blue-mid)}
+.insight-title{font-family:var(--serif);font-size:17px;font-weight:500;line-height:1.4;flex:1;transition:color .15s;color:var(--ink)}
+.insight-toggle{width:24px;height:24px;flex-shrink:0;border:1px solid var(--border-strong);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--ink-muted);margin-top:2px;transition:transform .25s,background .15s}
+.insight-body{max-height:0;overflow:hidden;transition:max-height .38s cubic-bezier(.4,0,.2,1)}
+.insight-body-inner{padding-bottom:1.5rem;font-size:15.5px;line-height:1.8;color:var(--ink-muted)}
+.insight-body-inner em{color:var(--ink);font-style:italic}
+.insight-body.open{max-height:400px}
+.insight-item.open .insight-toggle{transform:rotate(45deg);background:var(--surface)}
+.insight-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.06em;padding:2px 9px;border-radius:3px;margin-bottom:.75rem;text-transform:uppercase}
+.tag-blue{background:var(--blue-light);color:var(--blue-deep)}
+.tag-green{background:#e8f3e8;color:#1e4d1e}
+.tag-gold{background:var(--gold-light);color:#6b5020}
+.tag-rose{background:#f5eaf0;color:#5a1e3a}
+.tag-purple{background:#eeebf8;color:#2e1f6e}
+.tag-teal{background:#e3f2ee;color:#0f4a38}
+.chapter-wrap{background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.chapter-header{background:var(--blue-deep);color:#fff;padding:2rem 2.5rem}
+.chapter-header .ch-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.7;margin-bottom:.5rem;font-weight:600}
+.chapter-header h2{font-family:var(--serif);font-size:clamp(20px,3vw,26px);font-weight:500;line-height:1.25}
+.chapter-header p{margin-top:.75rem;font-size:14px;opacity:.75;line-height:1.6;font-weight:300}
+.chapter-body{padding:2.5rem}
+.chapter-toc{background:var(--surface);border-radius:6px;padding:1.25rem 1.5rem;margin-bottom:2rem}
+.chapter-toc h4{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--ink-faint);margin-bottom:.75rem}
+.chapter-toc ul{list-style:none;display:flex;flex-direction:column;gap:4px}
+.chapter-toc li a{font-size:14px;color:var(--blue-mid);text-decoration:none;display:flex;align-items:center;gap:6px}
+.chapter-toc li a:hover{text-decoration:underline;text-underline-offset:3px}
+.chapter-toc li a::before{content:'';display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.chapter-section{margin-bottom:2rem}
+.chapter-section h3{font-family:var(--serif);font-size:20px;font-weight:500;margin-bottom:1rem;color:var(--ink);padding-top:1.5rem;border-top:1px solid var(--border)}
+.chapter-section p{font-size:16px;line-height:1.85;color:#3a3a36;margin-bottom:1rem}
+.epoch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:12px;margin:1.5rem 0}
+.epoch-card{background:var(--surface);border-radius:6px;padding:1rem 1.1rem;border-left:3px solid var(--gold)}
+.epoch-era{font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--gold);text-transform:uppercase;margin-bottom:.3rem}
+.epoch-name{font-family:var(--serif);font-size:14px;font-weight:500;color:var(--ink);margin-bottom:.3rem;line-height:1.3}
+.epoch-desc{font-size:12.5px;color:var(--ink-muted);line-height:1.55}
+.pullquote{border-left:3px solid var(--gold);padding:1rem 1.5rem;margin:2rem 0;background:var(--gold-light);border-radius:0 6px 6px 0;font-family:var(--serif);font-size:17px;font-style:italic;line-height:1.65;color:var(--ink)}
+.wiley-cta-block{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;background:var(--blue-light);border:1px solid rgba(45,90,158,.2);border-radius:8px;padding:1.5rem 1.75rem;margin-top:2rem;flex-wrap:wrap}
+.wiley-cta-left{flex:1;min-width:200px}
+.wiley-cta-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-mid);margin-bottom:.3rem}
+.wiley-cta-text{font-size:14px;color:var(--ink-muted);line-height:1.6}
+.wiley-cta-btn{display:inline-block;background:var(--blue-deep);color:#fff;border-radius:5px;padding:12px 22px;font-size:14px;font-weight:600;font-family:var(--sans);text-decoration:none;white-space:nowrap;transition:opacity .15s;flex-shrink:0}
+.wiley-cta-btn:hover{opacity:.85}
+.quiz-wrap{background:var(--surface);border-radius:8px;padding:2rem}
+.quiz-wrap h3{font-family:var(--serif);font-size:20px;font-weight:500;margin-bottom:.4rem}
+.quiz-desc{font-size:14.5px;color:var(--ink-muted);margin-bottom:1.5rem;line-height:1.65}
+.quiz-progress-bar{height:3px;background:var(--border);border-radius:2px;margin-bottom:1.25rem;overflow:hidden}
+.quiz-progress-fill{height:100%;background:var(--blue-mid);border-radius:2px;transition:width .35s cubic-bezier(.4,0,.2,1)}
+.quiz-step-label{font-size:12px;color:var(--ink-faint);margin-bottom:1rem;letter-spacing:.04em}
+.quiz-q{font-size:16px;font-weight:400;margin-bottom:1.1rem;color:var(--ink);line-height:1.55;font-family:var(--serif)}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-option{background:#fff;border:1px solid var(--border);border-radius:6px;padding:11px 15px;font-size:14.5px;cursor:pointer;text-align:left;color:var(--ink-muted);transition:border-color .15s,background .15s,color .15s;line-height:1.5;font-family:var(--sans)}
+.quiz-option:hover{border-color:var(--border-strong);color:var(--ink)}
+.quiz-option.selected{border-color:var(--blue-mid);color:var(--blue-deep);background:var(--blue-light)}
+.quiz-nav{display:flex;justify-content:flex-end;margin-top:1.25rem}
+.quiz-next-btn{background:var(--ink);color:#fff;border:none;border-radius:5px;padding:10px 24px;font-size:14px;font-family:var(--sans);font-weight:600;cursor:pointer;letter-spacing:.02em;transition:opacity .15s}
+.quiz-next-btn:disabled{opacity:.35;cursor:not-allowed}
+.quiz-next-btn:not(:disabled):hover{opacity:.8}
+.quiz-result-card{background:#fff;border:1px solid var(--border);border-radius:6px;padding:1.5rem}
+.quiz-result-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
+.quiz-result-type{font-family:var(--serif);font-size:20px;font-weight:500;color:var(--ink);margin-bottom:.3rem}
+.quiz-result-ch{font-size:12.5px;color:var(--blue-mid);margin-bottom:.85rem;font-weight:600;letter-spacing:.03em}
+.quiz-result-body{font-size:15px;color:var(--ink-muted);line-height:1.75}
+.quiz-restart{margin-top:1rem;background:none;border:none;font-family:var(--sans);font-size:13px;color:var(--blue-mid);cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:0;display:block}
+.cta-section{background:var(--blue-deep);color:#fff;border-radius:8px;padding:3rem 2.5rem;text-align:center;margin:3.5rem 0}
+.cta-section h2{font-family:var(--serif);font-size:clamp(22px,4vw,30px);font-weight:500;margin-bottom:.75rem;line-height:1.25}
+.cta-section p{font-size:15px;opacity:.75;margin-bottom:2rem;line-height:1.65;font-weight:300;max-width:480px;margin-left:auto;margin-right:auto}
+.cta-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:1.75rem}
+.btn-primary{background:#fff;color:var(--blue-deep);border:none;border-radius:5px;padding:12px 28px;font-size:15px;font-weight:600;font-family:var(--sans);cursor:pointer;text-decoration:none;display:inline-block;transition:opacity .15s}
+.btn-primary:hover{opacity:.9}
+.btn-secondary{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:5px;padding:12px 28px;font-size:15px;font-family:var(--sans);cursor:pointer;text-decoration:none;display:inline-block;transition:border-color .15s}
+.btn-secondary:hover{border-color:rgba(255,255,255,.7)}
+.pub-badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:1.5rem}
+.pub-badge{font-size:12px;color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.2);border-radius:4px;padding:5px 12px;letter-spacing:.04em}
+footer{border-top:1px solid var(--border);padding:2rem 1.5rem;text-align:center;font-size:13px;color:var(--ink-faint);line-height:1.8}
+footer a{color:var(--ink-muted)}
+@media(max-width:600px){
+  nav{padding:0 1rem}
+  .nav-links{display:none}
+  .chapter-body{padding:1.5rem}
+  .cta-section{padding:2rem 1.5rem}
+  .epoch-grid{grid-template-columns:1fr 1fr}
+  .wiley-cta-block{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">The AI-Enabled Engineer</a>
+  <ul class="nav-links">
+    <li><a href="#insights">About the book</a></li>
+    <li><a href="#chapter1">Chapter 1 preview</a></li>
+    <li><a href="#quiz">Find your chapter</a></li>
+    <li><a href="https://www.wiley.com/en-us/The+AI-Enabled+Engineer%3A+A+Comprehensive+Framework+for+Engineering+Excellence+in+the+Age+of+Intelligence-p-9781394375783" target="_blank" class="nav-cta">Buy on Wiley &rarr;</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">
+    <span class="pub-pill">Wiley &amp; IEEE</span>
+    <div class="hero-meta">
+      <span>Kevin Cai</span>
+      <span class="hero-meta-dot"></span>
+      <span>2025</span>
+      <span class="hero-meta-dot"></span>
+      <span>8 min read</span>
+    </div>
+  </div>
+  <h1>What does it actually mean to be a great engineer<em> in the Age of Intelligence?</em></h1>
+  <p class="hero-lead">Most engineering books teach you <strong>what</strong> to do. After thirty years in hardware and software engineering &mdash; from signal integrity to AI-enabled systems &mdash; I became convinced the more important question is <strong>why</strong>, and whether the underlying principles still hold as AI reshapes everything around us.</p>
+  <p class="hero-lead">That conviction became a book. Here&rsquo;s what&rsquo;s inside &mdash; including a free sample of Chapter 1, and a quick way to find out which part speaks most to you.</p>
+</div>
+
+<section id="insights">
+  <div class="container">
+    <p class="section-label">Six things this book will change about how you engineer</p>
+    <div class="insight-list">
+
+      <div class="insight-item">
+        <div class="insight-header" onclick="toggleInsight(this)">
+          <span class="insight-title">Principles don&rsquo;t expire &mdash; but you need to know which ones</span>
+          <span class="insight-toggle">+</span>
+        </div>
+        <div class="insight-body">
+          <div class="insight-body-inner">
+            <span class="insight-tag tag-blue">Ch. 3 &mdash; Engineering Principles</span><br>
+            AI changes tools and workflows. What it doesn&rsquo;t change is the underlying logic of why good engineering works. The book maps 21 durable principles &mdash; from First Principles and Conservative Design to Optimization and Continuous Improvement. Understanding the <em>why</em> behind decisions is what separates engineers who thrive through disruption from those who don&rsquo;t.
+          </div>
+        </div>
+      </div>
+
+      <div class="insight-item">
+        <div class="insight-header" onclick="toggleInsight(this)">
+          <span class="insight-title">Methods and approaches are the bridge between principle and practice</span>
+          <span class="insight-toggle">+</span>
+        </div>
+        <div class="insight-body">
+          <div class="insight-body-inner">
+            <span class="insight-tag tag-green">Ch. 2 &amp; 4 &mdash; Methods &amp; Approaches</span><br>
+            There&rsquo;s a crucial difference between knowing a principle and knowing how to apply it. The book maps eight engineering methods &mdash; mathematical, experimental, data-driven, chain-of-thought, and more &mdash; alongside thirteen concrete approaches including Prototyping, Staging, Validating, and Spectrum Limiting.
+          </div>
+        </div>
+      </div>
+
+      <div class="insight-item">
+        <div class="insight-header" onclick="toggleInsight(this)">
+          <span class="insight-title">Hardware and software are no longer separate disciplines</span>
+          <span class="insight-toggle">+</span>
+        </div>
+        <div class="insight-body">
+          <div class="insight-body-inner">
+            <span class="insight-tag tag-gold">Ch. 5 &mdash; Engineering Applications</span><br>
+            Smartphones, electric vehicles, and humanoid robots are unified systems where the old distinction barely holds. This chapter addresses hardware and software together, and why hardware-software co-design is now a core competency rather than a niche skill.
+          </div>
+        </div>
+      </div>
+
+      <div class="insight-item">
+        <div class="insight-header" onclick="toggleInsight(this)">
+          <span class="insight-title">Engineering carries a social responsibility AI makes unavoidable</span>
+          <span class="insight-toggle">+</span>
+        </div>
+        <div class="insight-body">
+          <div class="insight-body-inner">
+            <span class="insight-tag tag-rose">Ch. 6 &mdash; Non-Engineering Applications</span><br>
+            Since Asimov articulated the Three Laws of Robotics in 1942, engineers building autonomous systems have carried a responsibility beyond technical performance. Chapter 6 applies engineering&rsquo;s rigor to social domains: survey design, policymaking, and institutional decision-making.
+          </div>
+        </div>
+      </div>
+
+      <div class="insight-item">
+        <div class="insight-header" onclick="toggleInsight(this)">
+          <span class="insight-title">You need a framework for technologies that don&rsquo;t exist yet</span>
+          <span class="insight-toggle">+</span>
+        </div>
+        <div class="insight-body">
+          <div class="insight-body-inner">
+            <span class="insight-tag tag-teal">Ch. 7 &mdash; Future Engineering Trends</span><br>
+            Nine emerging technologies examined through four engineering pathways: foundation, integration, application, and synthesis. The goal is not to predict the future &mdash; it&rsquo;s to give you the mental architecture to evaluate whatever comes next.
+          </div>
+        </div>
+      </div>
+
+      <div class="insight-item">
+        <div class="insight-header" onclick="toggleInsight(this)">
+          <span class="insight-title">AI is a tool, not a replacement &mdash; but only if you understand the underlying engineering</span>
+          <span class="insight-toggle">+</span>
+        </div>
+        <div class="insight-body">
+          <div class="insight-body-inner">
+            <span class="insight-tag tag-purple">Throughout</span><br>
+            The title says <em>AI-Enabled</em>, not <em>AI-Replaced</em>. Engineers most valuable in the years ahead are those who can direct AI, validate its outputs, and know when to override it. That requires the kind of judgment this book is designed to build.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="chapter1">
+  <div class="container">
+    <p class="section-label">Chapter 1 &mdash; free to read on Wiley</p>
+    <div class="chapter-wrap">
+
+      <div class="chapter-header">
+        <p class="ch-label">Chapter 1</p>
+        <h2>Introduction: Engineering in the Age of Intelligence</h2>
+        <p>From the pyramids to AI-enabled systems &mdash; how engineering&rsquo;s epochs shaped its principles, and what the transition to the Age of Intelligence demands of engineers today.</p>
+      </div>
+
+      <div class="chapter-body">
+
+        <div class="chapter-toc">
+          <h4>What Chapter 1 covers</h4>
+          <ul>
+            <li><a href="https://www.wiley.com/en-us/The+AI-Enabled+Engineer%3A+A+Comprehensive+Framework+for+Engineering+Excellence+in+the+Age+of+Intelligence-p-9781394375783" target="_blank">1.0 &mdash; The arc from ancient engineering to AI</a></li>
+            <li><a href="https://www.wiley.com/en-us/The+AI-Enabled+Engineer%3A+A+Comprehensive+Framework+for+Engineering+Excellence+in+the+Age+of+Intelligence-p-9781394375783" target="_blank">1.1 &mdash; Intent: hardware-software convergence in the Age of Intelligence</a></li>
+            <li><a href="https://www.wiley.com/en-us/The+AI-Enabled+Engineer%3A+A+Comprehensive+Framework+for+Engineering+Excellence+in+the+Age+of+Intelligence-p-9781394375783" target="_blank">1.1 &mdash; The principles-methods-approaches framework</a></li>
+            <li><a href="https://www.wiley.com/en-us/The+AI-Enabled+Engineer%3A+A+Comprehensive+Framework+for+Engineering+Excellence+in+the+Age+of+Intelligence-p-9781394375783" target="_blank">1.1 &mdash; Ten distinctive approaches of this book</a></li>
+            <li><a href="https://www.wiley.com/en-us/The+AI-Enabled+Engineer%3A+A+Comprehensive+Framework+for+Engineering+Excellence+in+the+Age+of+Intelligence-p-9781394375783" target="_blank">1.1 &mdash; Key terminologies: Hardware, Software, AI Era, and more</a></li>
+            <li><a href="https://www.wiley.com/en-us/The+AI-Enabled+Engineer%3A+A+Comprehensive+Framework+for+Engineering+Excellence+in+the+Age+of+Intelligence-p-9781394375783" target="_blank">1.2 &mdash; Book outlines and structure</a></li>
+          </ul>
+        </div>
+
+        <div class="chapter-section">
+          <h3>A glimpse inside</h3>
+          <p>Engineering as a profession was formalized during the Industrial Revolution; however, people have engineered technological solutions long before then. Ancient achievements like the Great Pyramids and Roman aqueducts emerged from practical experience, with builders developing techniques scientists later codified into principles like energy conservation. Now, as AI reshapes computer science, we face the challenge of defining new engineering principles for systems that increasingly shape society.</p>
+          <p>Engineering has progressed through six distinct technological epochs, each developing its own principles and methodologies:</p>
+
+          <div class="epoch-grid">
+            <div class="epoch-card">
+              <div class="epoch-era">Pre-Industrial</div>
+              <div class="epoch-name">Ancient times &ndash; 1760</div>
+              <div class="epoch-desc">Empirical methods and iterative refinement across diverse civilizations.</div>
+            </div>
+            <div class="epoch-card">
+              <div class="epoch-era">First Industrial Rev.</div>
+              <div class="epoch-name">1760 &ndash; 1840</div>
+              <div class="epoch-desc">Mechanical principles and systematic design with steam power.</div>
+            </div>
+            <div class="epoch-card">
+              <div class="epoch-era">Second Industrial Rev.</div>
+              <div class="epoch-name">1870 &ndash; 1914</div>
+              <div class="epoch-desc">Electrical theory and mass production techniques.</div>
+            </div>
+            <div class="epoch-card">
+              <div class="epoch-era">Digital Revolution</div>
+              <div class="epoch-name">1950s &ndash; 1990s</div>
+              <div class="epoch-desc">Circuit design principles and binary logic; analog to digital.</div>
+            </div>
+            <div class="epoch-card">
+              <div class="epoch-era">Information Era</div>
+              <div class="epoch-name">1980s &ndash; 2020s</div>
+              <div class="epoch-desc">Data as fundamental economic resource. Internet, distributed systems.</div>
+            </div>
+            <div class="epoch-card">
+              <div class="epoch-era">Age of Intelligence</div>
+              <div class="epoch-name">2020s &ndash; present</div>
+              <div class="epoch-desc">Autonomous decision-making, neural networks, human-AI interaction.</div>
+            </div>
+          </div>
+
+          <div class="pullquote">&ldquo;The future belongs to engineers who adapt to new paradigms rather than merely mastering specific technologies.&rdquo;</div>
+
+          <p>Chapter 1 introduces the three-pillar framework at the heart of this book &mdash; Principles (the <em>why</em>), Methods (the <em>how</em>), and Approaches (the <em>what</em>) &mdash; and explains ten distinctive angles the book takes. It also defines key terms including Hardware, Software, Integrated Systems, Embedded Systems, the Age of Intelligence, and the important distinction between the Age of Intelligence and the coming AI Era.</p>
+        </div>
+
+        <div class="wiley-cta-block">
+          <div class="wiley-cta-left">
+            <p class="wiley-cta-label">Open access on Wiley</p>
+            <p class="wiley-cta-text">Wiley has made the full Chapter 1 &mdash; including the complete table of contents &mdash; freely available on their site. No account required.</p>
+          </div>
+          <a href="https://www.wiley.com/en-us/The+AI-Enabled+Engineer%3A+A+Comprehensive+Framework+for+Engineering+Excellence+in+the+Age+of+Intelligence-p-9781394375783" target="_blank" class="wiley-cta-btn">Read Chapter 1 free on Wiley &rarr;</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="quiz">
+  <div class="container">
+    <p class="section-label">Find your chapter</p>
+    <div class="quiz-wrap">
+      <h3>Which engineer are you?</h3>
+      <p class="quiz-desc">Three quick questions to find the chapter most relevant to where you are right now.</p>
+      <div id="quiz-body">
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-fill" id="qbar" style="width:33%"></div>
+        </div>
+        <p class="quiz-step-label" id="qstep">Question 1 of 3</p>
+        <p class="quiz-q" id="qtext"></p>
+        <div class="quiz-options" id="qopts"></div>
+        <div class="quiz-nav">
+          <button class="quiz-next-btn" id="qnext" onclick="nextQ()" disabled>Next &rarr;</button>
+        </div>
+      </div>
+      <div id="quiz-result" style="display:none"></div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="cta-section">
+    <h2>The AI-Enabled Engineer</h2>
+    <p>A comprehensive framework for engineering excellence in the Age of Intelligence. Written for working engineers and the next generation entering an AI-transformed field.</p>
+    <div class="cta-buttons">
+      <a href="https://www.wiley.com/en-us/The+AI-Enabled+Engineer%3A+A+Comprehensive+Framework+for+Engineering+Excellence+in+the+Age+of+Intelligence-p-9781394375783" target="_blank" class="btn-primary">Get it on Wiley &rarr;</a>
+      <a href="https://www.ieee.org" target="_blank" class="btn-secondary">IEEE Press</a>
+    </div>
+    <div class="pub-badges">
+      <span class="pub-badge">Published by Wiley &amp; IEEE</span>
+      <span class="pub-badge">Kevin Cai, 2025</span>
+      <span class="pub-badge">9 Chapters + Appendix</span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p><em>The AI-Enabled Engineer: A Comprehensive Framework for Engineering Excellence in the Age of Intelligence</em></p>
+  <p style="margin-top:.4rem">Kevin Cai &nbsp;&middot;&nbsp; Published by Wiley and IEEE &nbsp;&middot;&nbsp; &copy; 2025</p>
+  <p style="margin-top:.4rem"><a href="https://www.wiley.com/en-us/The+AI-Enabled+Engineer%3A+A+Comprehensive+Framework+for+Engineering+Excellence+in+the+Age+of+Intelligence-p-9781394375783" target="_blank">Wiley</a> &nbsp;&middot;&nbsp; <a href="https://www.ieee.org" target="_blank">IEEE</a></p>
+</footer>
+
+<script>
+// Accordion
+function toggleInsight(header) {
+  var item = header.parentElement;
+  var body = item.querySelector('.insight-body');
+  var isOpen = item.classList.contains('open');
+  document.querySelectorAll('.insight-item.open').forEach(function(el) {
+    el.classList.remove('open');
+    el.querySelector('.insight-body').classList.remove('open');
+  });
+  if (!isOpen) {
+    item.classList.add('open');
+    body.classList.add('open');
+  }
+}
+
+// Quiz
+var questions = [
+  {
+    q: "What frustrates you most right now as an engineer?",
+    opts: [
+      "I know what to build but struggle to reason clearly about trade-offs",
+      "I'm strong in my domain but lost when AI or other disciplines enter the picture",
+      "I can execute the work but worry about its longer-term impact on people"
+    ]
+  },
+  {
+    q: "Where do you spend most of your engineering energy?",
+    opts: [
+      "Solving well-defined technical problems with clear success criteria",
+      "Navigating ambiguity across hardware, software, or AI systems",
+      "Influencing decisions — specs, strategy, policy, or stakeholder buy-in"
+    ]
+  },
+  {
+    q: "When a new AI tool enters your workflow, your first instinct is:",
+    opts: [
+      "Understand the underlying model so I can evaluate its outputs critically",
+      "Integrate it fast and figure out the limits empirically",
+      "Consider what happens when it's wrong — and who bears the consequence"
+    ]
+  }
+];
+
+var results = {
+  "0,0,0": { type: "The First-Principles Thinker",    ch: "Start with Chapters 3 & 2 — Engineering Principles and Methods",       body: "You care deeply about the why behind decisions. Chapters 2 and 3 are your home territory — 21 principles and 8 methods designed to sharpen exactly the kind of reasoning you value." },
+  "0,0,1": { type: "The Pragmatic Builder",            ch: "Start with Chapters 4 & 5 — Approaches and Applications",              body: "You trust your instincts but want a more systematic way to stress-test them. Chapters 4 and 5 translate principles into concrete approaches and show how they play out across hardware and software." },
+  "0,0,2": { type: "The Responsible Engineer",         ch: "Start with Chapter 6 — Non-Engineering Applications",                  body: "You think beyond the technical spec. Chapter 6 applies engineering's rigor to social domains: policymaking, objectivity design, and survey methodology." },
+  "0,1,0": { type: "The First-Principles Thinker",    ch: "Start with Chapter 3 — Engineering Principles",                        body: "You care deeply about the why. Chapter 3 maps 21 durable principles — the mental framework that holds steady even as tools and domains shift around you." },
+  "0,1,1": { type: "The Cross-Domain Integrator",     ch: "Start with Chapter 5 — Engineering Applications",                      body: "You live at the intersection of hardware, software, and AI. Chapter 5 addresses that convergence directly — co-design, embedded systems, and new competencies for unified products." },
+  "0,1,2": { type: "The Systems Thinker",             ch: "Start with Chapters 5 & 6 — Applications and Social Onus",             body: "You are drawn to consequence. Chapters 5 and 6 together map the full surface of an engineer's responsibility, from system architecture to societal impact." },
+  "1,0,0": { type: "The Reflective Practitioner",     ch: "Start with Chapters 2 & 3 — Methods and Principles",                   body: "You work well under ambiguity but want a richer vocabulary for the choices you are already making. Chapters 2 and 3 will give you the language and reasoning architecture you are looking for." },
+  "1,0,1": { type: "The Agile Systems Engineer",      ch: "Start with Chapter 4 — Engineering Approaches",                        body: "You are fast and adaptive. Chapter 4's 13 approaches — from Spectrum Limiting to Modularity — make your speed more principled and your iterations more defensible." },
+  "1,0,2": { type: "The Responsible Engineer",         ch: "Start with Chapter 6 — Non-Engineering Applications",                  body: "You think beyond the spec. Chapter 6 applies engineering's rigor to social domains: policymaking, objectivity design, and institutional decision-making." },
+  "1,1,0": { type: "The Systems Integrator",          ch: "Start with Chapters 4 & 5 — Approaches and Applications",              body: "You navigate complexity across disciplines. Chapters 4 and 5 map the toolkit and the terrain — from co-design principles to AI-enabled product development." },
+  "1,1,1": { type: "The AI-Native Engineer",          ch: "Start with Chapters 5 & 7 — Applications and Future Trends",           body: "You are already working at the frontier. Chapters 5 and 7 map hardware-software convergence, nine emerging technologies, and four pathways for making sense of what comes next." },
+  "1,1,2": { type: "The Strategic Leader",            ch: "Start with Chapters 6 & 8 — Social Applications and Reflections",      body: "You think about engineering at the level of systems and society. Chapters 6 and 8 address that directly — from engineering's social onus to the future framework of engineering practice." },
+  "2,0,0": { type: "The Critical Analyst",            ch: "Start with Chapter 3 — Engineering Principles",                        body: "You want to validate, not just use. Chapter 3's principles — especially First Principles, Evidence-Based Decision Making, and Being Critical — formalize the disposition you already have." },
+  "2,0,1": { type: "The Empirical Engineer",          ch: "Start with Chapters 2 & 4 — Methods and Approaches",                   body: "You learn by doing and testing. Experimental and data-driven methods in Chapter 2, paired with validation approaches in Chapter 4, are built for exactly this mindset." },
+  "2,0,2": { type: "The Responsible Engineer",         ch: "Start with Chapter 6 — Non-Engineering Applications",                  body: "You prioritize consequence. Chapter 6 shows how engineering's commitment to objectivity applies to social domains without losing the nuance those domains require." },
+  "2,1,0": { type: "The First-Principles Thinker",    ch: "Start with Chapters 3 & 7 — Principles and Future Trends",             body: "You want to understand deeply before integrating fast. Chapters 3 and 7 give you the durable principles and the future-technology framework to evaluate what comes next." },
+  "2,1,1": { type: "The AI-Native Engineer",          ch: "Start with Chapters 5 & 7 — Applications and Future Trends",           body: "You are already at the frontier. Chapters 5 and 7 map the convergence of hardware, software, and AI — and four pathways to stay oriented as the landscape keeps shifting." },
+  "2,1,2": { type: "The Strategic Leader",            ch: "Start with Chapters 6, 7 & 8 — Social Applications, Future Trends, Reflections", body: "You think at the level of engineering and society. These chapters are the most expansive in the book — and the most relevant to the engineering leadership you are developing." }
+};
+
+var answers = [];
+var current = 0;
+
+function renderQ() {
+  var q = questions[current];
+  document.getElementById('qtext').textContent = q.q;
+  document.getElementById('qstep').textContent = 'Question ' + (current + 1) + ' of 3';
+  document.getElementById('qbar').style.width = Math.round((current + 1) / 3 * 100) + '%';
+  var opts = document.getElementById('qopts');
+  opts.innerHTML = '';
+  q.opts.forEach(function(optText, i) {
+    var btn = document.createElement('button');
+    btn.className = 'quiz-option';
+    btn.textContent = optText;
+    if (answers[current] === i) { btn.classList.add('selected'); }
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.quiz-option').forEach(function(b) { b.classList.remove('selected'); });
+      btn.classList.add('selected');
+      answers[current] = i;
+      document.getElementById('qnext').disabled = false;
+    });
+    opts.appendChild(btn);
+  });
+  var nxt = document.getElementById('qnext');
+  nxt.disabled = (answers[current] === undefined);
+  nxt.textContent = current < 2 ? 'Next →' : 'See my result →';
+}
+
+function nextQ() {
+  if (answers[current] === undefined) { return; }
+  if (current < 2) {
+    current++;
+    renderQ();
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  var key = answers[0] + ',' + answers[1] + ',' + answers[2];
+  var r = results[key] || results['1,1,1'];
+  document.getElementById('quiz-body').style.display = 'none';
+  var rd = document.getElementById('quiz-result');
+  rd.style.display = 'block';
+  var card = document.createElement('div');
+  card.className = 'quiz-result-card';
+  card.innerHTML =
+    '<div class="quiz-result-label">Your engineer type</div>' +
+    '<div class="quiz-result-type">' + r.type + '</div>' +
+    '<div class="quiz-result-ch">' + r.ch + '</div>' +
+    '<div class="quiz-result-body">' + r.body + '</div>';
+  var restartBtn = document.createElement('button');
+  restartBtn.className = 'quiz-restart';
+  restartBtn.textContent = 'Retake the quiz';
+  restartBtn.addEventListener('click', restartQuiz);
+  rd.innerHTML = '';
+  rd.appendChild(card);
+  rd.appendChild(restartBtn);
+}
+
+function restartQuiz() {
+  answers = [];
+  current = 0;
+  document.getElementById('quiz-result').style.display = 'none';
+  document.getElementById('quiz-body').style.display = 'block';
+  renderQ();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  renderQ();
+});
+</script>
+</body>
+</html>
